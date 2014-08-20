@@ -19,14 +19,14 @@
 #
 ##############################################################################
 
-from tools.translate import _
-import netsvc as netsvc
+from openerp.tools.translate import _
+from openerp import netsvc as netsvc
 from openerp.osv import fields, orm
 from openerp.addons.base_status.base_state import base_state
 
 import time
-from tools import DEFAULT_SERVER_DATETIME_FORMAT as DATETIME_FORMAT
-from tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT as DATETIME_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DATE_FORMAT
 
 
 class mgmtsystem_nonconformity_cause(orm.Model):

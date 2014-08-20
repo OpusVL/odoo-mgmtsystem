@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from osv import fields, osv
+from openerp.osv import fields, osv
 
 
 class copy_verification_lines(osv.osv_memory):
