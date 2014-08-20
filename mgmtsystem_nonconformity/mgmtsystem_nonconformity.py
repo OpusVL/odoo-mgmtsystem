@@ -22,7 +22,7 @@
 from openerp.tools.translate import _
 from openerp import netsvc as netsvc
 from openerp.osv import fields, orm
-from openerp.addons.base_status.base_state import base_state
+from .base_state import base_state
 
 import time
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT as DATETIME_FORMAT
