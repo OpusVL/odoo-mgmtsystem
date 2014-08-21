@@ -96,9 +96,10 @@
 
         <!-- window actions and menus -->
 
+        <!-- TODO  Check this action in v8 is really match for action_browse_survey_response in v7 -->
         <menuitem id="menu_open_answers" 
             name="Survey Answers" 
-            action="survey.action_browse_survey_response" 
+            action="survey.action_survey_user_input" 
             parent="mgmtsystem.menu_mgmtsystem_main"
             sequence="90" 
             groups="base.group_user"/>
