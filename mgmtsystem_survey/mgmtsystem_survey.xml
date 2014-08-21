@@ -106,12 +106,13 @@
 
         <record id="action_survey_form" model="ir.actions.act_window">
             <field name="name">Surveys</field>
-            <field name="res_model">survey</field>
+            <field name="res_model">survey.survey</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain" eval="[('is_management_system_survey', '=', True)]"/>
             <field name="view_id" ref="survey.survey_tree"></field>
-            <field name="search_view_id" ref="survey.survey_search"/>
+            <!-- survey_search doesn't seem to have an equivalent in v8, so simply commented out reference -->
+            <!-- <field name="search_view_id" ref="survey.survey_search"/> -->
         </record>
 
         <menuitem id="menu_open_survey" 
