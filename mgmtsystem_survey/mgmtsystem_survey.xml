@@ -1,19 +1,12 @@
 <openerp>
     <data>
 
-        <!-- Survey Type -->
-
-        <record model="survey.type" id="mgmtsystem_survey_type">
-            <field name="name">Management System</field>
-            <field name="code">Management System</field>
-        </record>
-
         <!-- Survey -->
 
-        <record model="survey" id="mgmtsystem_survey_satisfaction">
+        <record model="survey.survey" id="mgmtsystem_survey_satisfaction">
             <field name="title">Customer Satisfaction Survey</field>
             <field name="responsible_id" ref="base.user_root"/>
-            <field name="type" ref="mgmtsystem_survey_type"/>
+            <field name="is_management_system_survey" eval="True"/>
             <field name="state">open</field>
             <field name="tot_comp_survey">0</field>
             <field name="tot_start_survey">0</field>
@@ -115,7 +108,7 @@
             <field name="res_model">survey</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain" eval="[('type','=',ref('mgmtsystem_survey_type'))]"/>
+            <field name="domain" eval="[('is_management_system_survey', '=', True)]"/>
             <field name="view_id" ref="survey.survey_tree"></field>
             <field name="search_view_id" ref="survey.survey_search"/>
         </record>
