@@ -25,10 +25,11 @@
             <field name="arch" type="xml">
                 <search string="Action">
                     <group>
-                        <!-- TODO state :: selection is now state_id :: many2one crm.claim.stage -->
-                        <filter name="current" icon="terp-document-new" domain="[('state','in',('draft','open','pending'))]" string="Open" help="Open Actions"/>
+                        <!-- TODO reinstate this search using stage_id - perhaps boolean calculated field? -->
+                        <!-- <filter name="current" icon="terp-document-new" domain="[('state','in',('draft','open','pending'))]" string="Open" help="Open Actions"/>
                         <filter icon="terp-camera_test" domain="[('state','in',('cancelled','done'))]" string="Closed" help="Closed Actions"/>
                         <separator orientation="vertical"/>
+                        -->
                         <field name="reference"/>
                         <field name="date" select='1'/>
                         <field name="user_id"/>
@@ -51,14 +52,21 @@
             <field name="arch" type="xml">
                 <form string="Action" version="7.0">
                     <header>
-                        <!-- TODO state :: selection is now state_id :: many2one crm.claim.stage -->
+                        <!-- TODO Reinstate buttons using stage_id -->
+                        <!--
                         <button name="case_cancel" string="Cancel" states="draft,pending" type="object" icon="gtk-cancel"/>
                         <button name="case_open" string="Open" states="draft,pending" type="object" icon="gtk-go-forward"/>
                         <button name="case_pending" string="Pending" states="open" type="object" icon="gtk-go-forward"/>
+                        -->
+                        <!-- TODO state :: selection is now state_id :: many2one crm.claim.stage -->
+
                         <!-- Corrective actions can be already implemented when recording the NC, so they can be created and immediately closed -->
+                        <!--  TODO Resinstate close button using state_id
                         <button name="case_close" string="Close" states="draft,open" type="object" icon="gtk-jump-to"/>
+                        -->
                         <!-- TODO Work out how to get the below to work with new stage_id many2one field -->
                         <!-- <field name="state" widget="statusbar" statusbar_visible="draft,open,pending,done"/> -->
+                        <field name="stage_id" widget="statusbar" clickable="True"/>
                     </header>
                     <sheet string="Action">
                         <group colspan="4" col="4">
