@@ -25,11 +25,12 @@
             <field name="arch" type="xml">
                 <search string="Action">
                     <group>
-                        <!-- TODO reinstate this search using stage_id - perhaps boolean calculated field? -->
-                        <!-- <filter name="current" icon="terp-document-new" domain="[('state','in',('draft','open','pending'))]" string="Open" help="Open Actions"/>
-                        <filter icon="terp-camera_test" domain="[('state','in',('cancelled','done'))]" string="Closed" help="Closed Actions"/>
-                        <separator orientation="vertical"/>
+                        <!-- TODO Don't like matching on name of something so configurable
+                                  Consider adding considered_open flag to stages and matching on that?
                         -->
+                        <filter name="current" icon="terp-document-new" domain="[('stage_id.name','in',('New','Pending'))]" string="Open" help="Open Actions"/>
+                        <filter icon="terp-camera_test" domain="[('stage_id.name','in',('Rejected','Settled'))]" string="Closed" help="Closed Actions"/>
+                        <separator orientation="vertical"/>
                         <field name="reference"/>
                         <field name="date" select='1'/>
                         <field name="user_id"/>
