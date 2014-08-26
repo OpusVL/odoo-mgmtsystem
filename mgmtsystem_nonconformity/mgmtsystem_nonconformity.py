@@ -208,10 +208,10 @@ class mgmtsystem_nonconformity(base_state, orm.Model):
     def case_send_note(self, cr, uid, ids, text, data=None, context=None):
         for id in ids:
             pre = self.case_get_note_msg_prefix(cr, uid, id, context=context)
-            msg = '%s <b>%s</b>' % (pre, text)
+            msg = u'%s <b>%s</b>' % (pre, text)
             if data:
                 o = self.browse(cr, uid, ids, context=context)[0]
-                post = _('\n<br />\n<ul><li> <b>Stage:</b> %s \xe2\x86\x92 %s</li></ul>') % (o.state, data['state'])
+                post = _(u'\n<br />\n<ul><li> <b>Stage:</b> %s \xe2\x86\x92 %s</li></ul>') % (o.state, data['state'])
                 msg += post
             self.message_post(cr, uid, [id], body=msg, context=context)
         return True
