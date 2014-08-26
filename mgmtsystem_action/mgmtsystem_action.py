@@ -37,7 +37,13 @@ class mgmtsystem_action(orm.Model):
                                          ('improvement', 'Improvement Opportunity')],
                                         'Response Type'),
         'system_id': fields.many2one('mgmtsystem.system', 'System'),
-        'company_id': fields.many2one('res.company', 'Company')
+        'company_id': fields.many2one('res.company', 'Company'),
+        'is_closed': fields.function(
+                lambda s, *a, **k : s._func_is_closed(*a, **k),
+                type='boolean',
+                string='Is closed',
+                method=True,
+        ),
     }
 
     _defaults = {
@@ -71,5 +77,24 @@ class mgmtsystem_action(orm.Model):
         query = {'db': cr.dbname}
         fragment = {'id': action.id, 'model': self._name}
         return urljoin(base_url, "?%s#%s" % (urlencode(query), urlencode(fragment)))
+
+    def is_closed_calculation(self, cr, uid, obj, context=None):
+        """Is the passed mgmtsystem.action considered to be 'closed'?
+
+        Override this method if you want to change the criteria.
+
+        obj: An mgmtsystem.action object : osv.browse
+
+        Returns: bool
+        """
+        return obj.stage_id.name in {'Rejected', 'Settled'}
+
+    def _func_is_closed(self, cr, uid, ids, field_name, arg, context=None):
+        actions = self.browse(cr, uid, ids, context=context)
+        return {
+            act.id: self.is_closed_calculation(cr, uid, act, context=context)
+            for act in actions
+        }
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
