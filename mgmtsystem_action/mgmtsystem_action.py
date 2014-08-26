@@ -89,12 +89,22 @@ class mgmtsystem_action(orm.Model):
         """
         return obj.stage_id.name in {'Rejected', 'Settled'}
 
+    def is_closed_search(self, cr, uid, context=None):
+        """Return the search that finds closed actions in the True case.
+        """
+        return [('stage_id.name', 'in', ['Rejected', 'Settled'])]
+
+    def _func_search_is_closed(self, cr, uid, model, field_name, query, context=None):
+        if field_name != 'is_closed':
+            return []
+
     def _func_is_closed(self, cr, uid, ids, field_name, arg, context=None):
         actions = self.browse(cr, uid, ids, context=context)
         return {
             act.id: self.is_closed_calculation(cr, uid, act, context=context)
             for act in actions
         }
+
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
