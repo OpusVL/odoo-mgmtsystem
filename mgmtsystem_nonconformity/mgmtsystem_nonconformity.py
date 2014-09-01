@@ -248,7 +248,7 @@ class mgmtsystem_nonconformity(base_state, orm.Model):
         """Change state from analysis to pending approval"""
         o = self.browse(cr, uid, ids, context=context)[0]
         if not o.analysis_date:
-            err = _('Analysis must be performed before submiting to approval.')
+            err = _('Analysis must be performed before submitting to approval.')
             raise orm.except_orm(_('Error !'), err)
         vals = {
             'state': 'pending',
