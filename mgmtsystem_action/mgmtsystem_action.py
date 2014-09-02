@@ -19,17 +19,28 @@
 #
 ##############################################################################
 
+from . import base_state
 from openerp.tools.translate import _
 from urllib import urlencode
 from urlparse import urljoin
-from openerp.osv import fields, orm
+from openerp.osv import fields, orm, osv
 
+AVAILABLE_STATES = [
+    ('draft', 'New'),
+    ('cancel', 'Cancelled'),
+    ('open', 'In Progress'),
+    ('pending', 'Pending'),
+    ('done', 'Closed')
+]
 
-class mgmtsystem_action(orm.Model):
+class mgmtsystem_action(base_state.base_state, osv.osv):
     _name = "mgmtsystem.action"
     _description = "Action"
-    _inherit = "crm.claim"
+    #_inherit = "crm.claim"
+    _inherit = ['mail.thread']
+    _order = "date desc"
     _columns = {
+        'name': fields.char('Action Subject', size=128, required=True),
         'reference': fields.char('Reference', size=64, required=True, readonly=True),
         'type_action': fields.selection([('immediate', 'Immediate Action'),
                                          ('correction', 'Corrective Action'),
@@ -37,12 +48,18 @@ class mgmtsystem_action(orm.Model):
                                          ('improvement', 'Improvement Opportunity')],
                                         'Response Type'),
         'system_id': fields.many2one('mgmtsystem.system', 'System'),
-        'company_id': fields.many2one('res.company', 'Company')
+        'company_id': fields.many2one('res.company', 'Company'),
+        'user_id': fields.many2one('res.users', 'Responsible'),
+        'date': fields.datetime('Claim Date', select=True),
+        'date_deadline': fields.date('Deadline'),
+        'description': fields.text('Description'),
+        'state': fields.selection(AVAILABLE_STATES, 'Status', required=True),
     }
 
     _defaults = {
         'company_id': lambda self, cr, uid, c: self.pool.get('res.users').browse(cr, uid, uid, c).company_id.id,
         'reference': 'NEW',
+        'state': 'draft',
     }
 
     def create(self, cr, uid, vals, context=None):
