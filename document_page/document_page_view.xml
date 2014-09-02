@@ -54,8 +54,8 @@
                         <label for="content" string="Template"/>
                         that will be used as a content template for all new page of this category.
                     </div>
-                    <field name="content" placeholder="e.g. Once upon a time..." class="oe_edit_only" widget="html"/>
-                    <div class="oe_document_page">
+                    <field name="content" type="html" widget="html" />
+                    <div class="oe_document_page" attrs="{'invisible':[('type','=','content')]}">
                         <field name="display_content" widget="html" class="oe_view_only" options='{"safe": True}'/>
                     </div>
                 </form>
