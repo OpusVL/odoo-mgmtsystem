@@ -32,7 +32,7 @@ This module enables you to manage the different actions of your management syste
   * preventive actions
   * improvement opportunities.
 """,
-    "depends": ['mgmtsystem', 'crm_claim'],
+    "depends": ['mgmtsystem'],
     "data": [
         'security/ir.model.access.csv',
         'security/mgmtsystem_action_security.xml',
