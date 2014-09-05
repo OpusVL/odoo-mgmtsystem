@@ -58,7 +58,7 @@
                         <button name="case_pending" string="Pending" states="open" type="object" icon="gtk-go-forward"/>
 
                         <!-- Corrective actions can be already implemented when recording the NC, so they can be created and immediately closed -->
-                        <button name="case_close" string="Close" states="draft,open" type="object" icon="gtk-jump-to"/>
+                        <button name="case_close" string="Close" states="draft,open,pending" type="object" icon="gtk-jump-to"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,open,pending,done"/>
                     </header>
                     <sheet string="Action">
