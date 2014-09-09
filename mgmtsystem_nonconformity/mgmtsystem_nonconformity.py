@@ -279,11 +279,13 @@ class mgmtsystem_nonconformity(base_state, orm.Model):
             raise orm.except_orm(_('Error !'), _('Action plan must be approved before opening.'))
         self.case_open_send_note(cr, uid, ids, context=context)
         #Open related Actions
+        action_m = self.pool.get('mgmtsystem.action')
         if o.immediate_action_id and o.immediate_action_id.state == 'draft':
-            o.immediate_action_id.case_open()
-        for a in o.action_ids:
-            if a.state == 'draft':
-                a.case_open()
+            action_m.case_open(cr, uid, [o.immediate_action_id.id], context=context)
+        action_m.case_open(cr, uid,
+            [a.id for a in o.action_ids if a.state == 'draft'],
+            context=context
+        )
         return self.write(cr, uid, ids, {'state': 'open', 'evaluation_date': None, 'evaluation_user_id': None}, context=context)
 
     def action_sign_evaluation(self, cr, uid, ids, context=None):
