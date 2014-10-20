@@ -3,6 +3,7 @@
     <data>
 
         <record model="ir.actions.act_window" id="action_mgmtsystem_action">
+            <field name="name">board.mgmtsystem.action.tree</field>
             <field name="res_model">mgmtsystem.action</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree</field>
