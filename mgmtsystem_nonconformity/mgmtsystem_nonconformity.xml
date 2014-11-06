@@ -83,9 +83,12 @@
                         <field name="state" widget="statusbar" statusbar_visible="draft,analysis,pending,open,done"/>
                     </header>
                 <sheet string="Non-Conformity">
+                    <label for="name" class="oe_edit_only"/>
+                    <h1>
+                        <field name="name" attrs="{'readonly':[('state','not in',['draft'])]}"/>
+                    </h1>
                     <group>
                         <group>
-                        	<field name="name" attrs="{'readonly':[('state','not in',['draft'])]}"/>
                         	<field name="ref" attrs="{'readonly':[('state','not in',['draft'])]}"/>
                         	<field name="date" attrs="{'readonly':[('state','not in',['draft'])]}"/>
                         	<field name="partner_id" attrs="{'readonly':[('state','not in',['draft','analysis'])]}"/>
