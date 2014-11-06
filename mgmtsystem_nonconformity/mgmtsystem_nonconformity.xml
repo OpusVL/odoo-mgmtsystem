@@ -15,7 +15,7 @@
                     <field name="ref"/>
                     <field name="date"/>
                     <field name="partner_id"/>
-                    <field name="description"/>
+                    <field name="name"/>
                     <field name="author_user_id"/>
                     <field name="responsible_user_id"/>
                     <field name="manager_user_id"/>
@@ -85,6 +85,7 @@
                 <sheet string="Non-Conformity">
                     <group>
                         <group>
+                        	<field name="name" attrs="{'readonly':[('state','not in',['draft'])]}"/>
                         	<field name="ref" attrs="{'readonly':[('state','not in',['draft'])]}"/>
                         	<field name="date" attrs="{'readonly':[('state','not in',['draft'])]}"/>
                         	<field name="partner_id" attrs="{'readonly':[('state','not in',['draft','analysis'])]}"/>

@@ -138,7 +138,6 @@ class mgmtsystem_nonconformity(base_state, orm.Model):
     """
     _name = "mgmtsystem.nonconformity"
     _description = "Nonconformity of the management system"
-    _rec_name = "description"
     _inherit = ['mail.thread']
     _order = "date desc"
 
@@ -161,6 +160,7 @@ class mgmtsystem_nonconformity(base_state, orm.Model):
         'origin_ids': fields.many2many('mgmtsystem.nonconformity.origin', 'mgmtsystem_nonconformity_origin_rel', 'nonconformity_id', 'origin_id', 'Origin', required=True),
         'procedure_ids': fields.many2many('document.page', 'mgmtsystem_nonconformity_procedure_rel', 'nonconformity_id', 'procedure_id', 'Procedure'),
         'description': fields.text('Description', required=True),
+        'name': fields.char('Subject', required=True),
         'state': fields.selection(_STATES, 'State', readonly=True),
         'state_name': fields.function(_state_name, string='State Description', type='char', size=40),
         'system_id': fields.many2one('mgmtsystem.system', 'System'),
